@@ -1,0 +1,12 @@
+{
+    "age": 30,
+    "height": 5.9,
+    "weight": 70,
+    "aids": 0,
+    "cirrhosis": 1,
+    "hepatic_failure": 0,
+    "immunosuppression": 1,
+    "leukemia": 0,
+    "lymphoma": 1,
+    "solid_tumor_with_metastasis": 1
+}
