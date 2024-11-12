@@ -24,7 +24,7 @@ async def predict(file: UploadFile = File(...)):
         input_df = pd.DataFrame([input_data])  # Convert dictionary to DataFrame
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error reading the JSON file: {e}")
-
+    
     # Make prediction
     try:
         prediction = model.predict(input_df)
