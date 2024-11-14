@@ -8,6 +8,7 @@ url = "http://127.0.0.1:8000/predict/"
 try:
     # Open the input JSON file
     with open("json_file.json", "r") as file:
+        # Send the POST request with the JSON file
         response = requests.post(url, files={"file": ("json_file.json", file, "application/json")})
     
     # Check for HTTP errors
@@ -15,11 +16,17 @@ try:
     
     # Parse and print the response
     result = response.json()
-    print("Prediction:", result["prediction"])
-    print("Probability:", result["probability"])
+    
+    # Using .get() to avoid KeyError if any field is missing
+    prediction = result.get("prediction", "Prediction not available")
+    probability = result.get("probability", "Probability not available")
+    
+    print("Prediction:", prediction)
+    print("Probability:", probability)
+
 except requests.exceptions.RequestException as e:
     print(f"API request error: {e}")
 except json.JSONDecodeError:
     print("Error decoding the response from the API.")
-except KeyError as e:
-    print(f"Missing expected field in the API response: {e}")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")

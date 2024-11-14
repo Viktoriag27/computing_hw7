@@ -1,5 +1,5 @@
-# Importing necessary module for Logistic Regression
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
 
 # train_model: Function to train the Logistic Regression model
 def train_model(X_train, y_train):
@@ -21,9 +21,6 @@ def train_model(X_train, y_train):
     
     # Return the trained model
     return model
-
-# Importing necessary module to calculate ROC AUC score
-from sklearn.metrics import roc_auc_score
 
 # evaluate_model: Function to make predictions and compute ROC AUC score
 def evaluate_model(model, X_train, X_test, y_train, y_test):
