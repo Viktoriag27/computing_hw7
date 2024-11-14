@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split  # For splitting data into train and test sets
+from sklearn.model_selection import train_test_split  # For splitting data
 
 # Defining function to load csv file
 def load_data(file_path):                  
@@ -12,7 +12,7 @@ def load_data(file_path):
     Returns:
     pd.DataFrame: DataFrame containing the data from the CSV file.
     """
-    return pd.read_csv(file_path)  # Read and return the CSV file as a DataFrame
+    return pd.read_csv(file_path)
 
 # Function to clean and preprocess the data
 def clean_data(df):
@@ -30,14 +30,11 @@ def clean_data(df):
     pd.DataFrame: Cleaned and preprocessed DataFrame.
     """
     # Drop rows with missing values in specific columns ('age', 'gender', 'ethnicity')
-    df = df.dropna(subset=['age', 'gender', 'ethnicity'])  # Drop rows with missing values
-    
-    # Explicitly create a copy to avoid the SettingWithCopyWarning
-    df = df.copy()  # Make sure df is a copy, not a view
+    df.dropna(subset=['age', 'gender', 'ethnicity'], inplace = True)
     
     # Fill missing values in 'height' and 'weight' with the respective column's mean
-    df.loc[:, 'height'] = df['height'].fillna(df['height'].mean())  # Use .loc to avoid warnings
-    df.loc[:, 'weight'] = df['weight'].fillna(df['weight'].mean())  # Use .loc to avoid warnings
+    df['height'].fillna(df['height'].mean(), inplace=True)
+    df['weight'].fillna(df['weight'].mean(), inplace=True)
     
     # Convert 'ethnicity' column into one-hot encoded columns
     df = pd.get_dummies(df, columns=['ethnicity'])
